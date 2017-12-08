@@ -5,19 +5,19 @@ type User @model {
   id: ID! @isUnique
   name: String
   dateOfBirth: DateTime
-
-  # Uncomment below - you can declare relations between models like this
-
-  # posts: [Post!]! @relation(name: "UserPosts")
 }
 
+type Author @model {
+  id: ID! @isUnique
+  name: String!
+  image: String!
+  poems: [Poem!]! @relation(name: "AuthorPoems")
+}
 
-# Uncomment the model below as well
-
-# type Post @model {
-#   id: ID! @isUnique
-#   title: String!
-#
-#   # Every relation also required a back-relation (to determine 1:1, 1:n or n:m)
-#   author: User! @relation(name: "UserPosts")
-# }
+type Poem @model {
+  id: ID! @isUnique
+  name: String!
+  image: String!
+  lines: [String!]!
+  author: Author! @relation(name: "AuthorPoems")
+}
